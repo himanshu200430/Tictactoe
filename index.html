@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicTacToe.com</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Orbitron:wght@500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            background-image: url(https://i.pinimg.com/originals/5c/20/2e/5c202eeba6b8c798b000567c8014d638.gif);
+            margin: 0;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .nav {
+            border: 2px solid rgb(27, 5, 27);
+            background-color: rgb(27, 5, 27);
+            height: 7vh;
+            color: #f4f1f8;
+            /* Soft white-purple */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 1px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .nav p {
+            font-size: 1.4rem;
+            margin: 0;
+        }
+
+        .gamecontainer {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            gap: 170px;
+
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 10vw);
+            grid-template-rows: repeat(3, 10vw);
+            background-image: url(https://c0.wallpaperflare.com/preview/462/1014/466/backdrop-background-colour-design-space.jpg);
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .box {
+            border: 5px solid transparent;
+            border-image: url(https://i.pinimg.com/originals/ee/25/1d/ee251d0102b402d47f3849792bc46e76.gif) 30 round;
+            font-size: 7vw;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #00ffc3;
+            /* Aqua/cyan */
+            text-shadow: 3px 3px 2px #222;
+            font-family: 'Fredoka One', cursive;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .box:hover {
+            background-color: rgba(174, 117, 226, 0.4);
+        }
+
+        .gameinfo {
+            padding: 0 34px;
+        }
+
+        .gameinfo h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #f8e9ff;
+            /* Pastel violet */
+            text-shadow: 1px 1px 4px #8722e2;
+        }
+
+        .gameinfo span {
+            font-size: 20px;
+            display: inline-block;
+            margin-top: 10px;
+            color: #ffe2ff;
+            /* Light pink */
+            font-weight: 600;
+        }
+
+        #reset {
+            margin-left: 20px;
+            padding: 6px 12px;
+            background-color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            color: #5e0080;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+
+        #reset:hover {
+            background-color: #d7c2ff;
+            color: #000;
+        }
+
+        .br-0 {
+            border-right: 0;
+        }
+
+        .bl-0 {
+            border-left: 0;
+        }
+
+        .bb-0 {
+            border-bottom: 0;
+        }
+
+        .bt-0 {
+            border-top: 0;
+        }
+
+        #winGif {
+            position: fixed;
+            top: 37vh;
+            left: 20vw;
+            width: 50vw;
+            height: 50vh;
+            object-fit: top;
+            z-index: 9999;
+            pointer-events: all;
+        }
+
+        .line{
+            background-image: url(https://i.pinimg.com/736x/9c/be/d3/9cbed3b1971b2f371dee3c36b250f8c5.jpg);
+            width: 0vw;
+            height: 3vh;
+            position: absolute;
+            border-radius: 15px;
+            border: 0px solid black;
+            transition: 0.2s ease-in-out 0.05s;
+
+            box-shadow: 3px 3px 3px black;
+        }
+
+        .horrorheadingcontainer {
+
+            background-image: url(https://static.vecteezy.com/system/resources/thumbnails/002/174/599/small/realistic-brown-wood-template-free-vector.jpg);
+            object-fit: cover;
+            border-radius: 15px;
+            position: fixed;
+            top: 40vh;
+            left: 34vw;
+            width: 40vw;
+            height: 15vh;
+            z-index: 10;
+            font-family: 'Creepster', cursive;
+            font-size: 70px;
+            font-weight: bold;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke: 2px black;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            /*transition: all 3s ease-in-out;
+        animation: popupscale 0.6s ease-in-out forwards;*/
+
+        }
+
+        /* @keyframes popupscale {
+            0%{
+                transform: scale(0.4);
+                
+            }
+
+            100%{
+                transform: scale(0.4);
+                
+            }
+            
+        }*/
+        @media screen and (max-width) {}
+
+        @media screen and (max-width:950px) {
+            .gamecontainer {
+                position: absolute;
+                flex-wrap: wrap;
+                gap: 60px;
+            }
+
+            .gameinfo {
+                margin-top: 34px;
+            }
+
+            .gameinfo h1 {
+                font-size: 1.5rem;
+
+            }
+
+            .horrorheadingcontainer {
+                height: 60vh;
+                width: 40vw;
+                font-size: 50px;
+        
+            }
+
+
+            .container {
+                display: grid;
+                grid-template-columns: repeat(3, 20vw);
+                grid-template-rows: repeat(3, 20vw);
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .container {
+                grid-template-columns: repeat(3, 25vw);
+                grid-template-rows: repeat(3, 25vw);
+            }
+
+            .horrorheadingcontainer {
+
+                width: 30vw;
+                height: 20vh;
+                font-size: 40px;
+            }
+
+            .gameinfo h1 {
+                font-size: 1.1rem;
+            }
+
+
+            .gameinfo>div {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <p>MyTicTacToe.com</p>
+    </div>
+
+    <div class="gamecontainer">
+
+
+        <div class="container">
+        <div class="line"></div>
+            <div class="box bt-0 bl-0"><span class="boxtext"></span></div>
+            <div class="box bt-0"><span class="boxtext"></span></div>
+            <div class="box bt-0 br-0"><span class="boxtext"></span></div>
+            <div class="box bl-0"><span class="boxtext"></span></div>
+            <div class="box"><span class="boxtext"></span></div>
+            <div class="box br-0"><span class="boxtext"></span></div>
+            <div class="box bl-0 bb-0"><span class="boxtext"></span></div>
+            <div class="box bb-0"><span class="boxtext"></span></div>
+            <div class="box br-0 bb-0"><span class="boxtext"></span></div>
+        </div>
+
+
+        <div class="gameinfo">
+            <h1>Welcome to Tic Tac MyTicTacToe</h1>
+            <div>
+                <span class="info">Turn for X</span>
+                <button id="reset">Reset</button>
+            </div>
+
+        </div>
+    </div>
+    <img id="winGif" style="display: none;"
+        src="https://i.pinimg.com/originals/41/e7/4b/41e74b0f91b7cb7df6b73e34ae8528a4.gif" alt="">
+    <div class="horrorheadingcontainer">
+        <div class="childcontain">
+            GAME OVER
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
